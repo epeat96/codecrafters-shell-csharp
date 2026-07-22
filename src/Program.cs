@@ -8,7 +8,16 @@ class Program
         {
             Console.Write("$ ");
             command = Console.ReadLine() ?? "";
-            Console.WriteLine($"{command}: command not found");
-        }while(!command.Equals("exit"));
+        }while(Eval(command) != 0);
+    }
+
+    static int Eval(string command)
+    {
+        if(command.Equals("exit")) 
+        {
+            return 0;
+        }
+        Console.WriteLine($"{command}: command not found");
+        return 1;
     }
 }
