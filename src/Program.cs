@@ -3,11 +3,12 @@ class Program
     static void Main()
     {
         // TODO: Uncomment the code below to pass the first stage
-        while (true)
+        var command = "";
+        do
         {
             Console.Write("$ ");
-            var command = Console.ReadLine();
+            command = Console.ReadLine() ?? "";
             Console.WriteLine($"{command}: command not found");
-        }
+        }while(!command.Equals("exit"));
     }
 }
