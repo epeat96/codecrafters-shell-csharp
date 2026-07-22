@@ -19,7 +19,7 @@ public class CdCommand : ICommand
             return ResultCode.Error;
         }
         
-        shell.Cwd = Path.GetFullPath(path, shell.Cwd);
+        shell.Cwd = Path.GetFullPath(path);
         
         return ResultCode.Success;
     }
