@@ -33,7 +33,7 @@ public class Shell
             var binary = PathHelper.SearchPathForCommand(command);
             if (binary is not null)
             {
-               return ExecutableHelper.Execute(binary, args);
+               return ExecutableHelper.Execute(command, args);
             }
             return CommandsHelper.CommandNotFound(command);
         }
