@@ -8,7 +8,7 @@ public class CdCommand : ICommand
 
         if (args.Length == 0)
         {
-            Console.WriteLine("Error, no arguments");
+            Console.WriteLine("cd: Error, no arguments");
             return ResultCode.Error;
         }
         
