@@ -16,7 +16,7 @@ public static class CommandsHelper
     
     public static EvalCode  CommandNotFound(string command)
     {
-        Console.WriteLine($"{command}: command not found");
+        Console.WriteLine($"{command}: not found");
         return EvalCode.Success;
     }
 }
