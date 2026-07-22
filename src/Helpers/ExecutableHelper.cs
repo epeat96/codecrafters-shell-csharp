@@ -22,7 +22,6 @@ public class ExecutableHelper
         // Omit this ONLY if you explicitly need asynchronous execution.
         process.WaitForExit();
 
-        Console.WriteLine($"Program exited with code: {process.ExitCode}");
         return ResultCode.Success;
     }
 }
