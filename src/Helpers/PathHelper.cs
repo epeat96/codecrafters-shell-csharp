@@ -7,7 +7,7 @@ public static class PathHelper
 
     public static string? SearchPathForDir(string path)
     {
-        if(!Directory.Exists(Path.GetFullPath(path)))
+        if(!Directory.Exists(Path.GetFullPath(path, Program.GetShellInstance().Cwd)))
         {
             return null;
         }
