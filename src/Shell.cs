@@ -13,16 +13,24 @@ public class Shell
             Console.Write("$ ");
             var userInput = Console.ReadLine()!.Split(' ');
             command = userInput.First();
-            args = userInput.Skip(1).ToArray();
+            args = userInput
+                .Where(arg => !string.IsNullOrWhiteSpace(arg))
+                .Skip(1)
+                .ToArray();
                 
-        }while(!CommandsHelper.IsExitCode(Eval(command,args)));
+        }while(!EvalHelper.IsExitCode(Eval(command,args)));
     }
 
-    static EvalCode Eval(string command, string[] args)
+    static ResultCode Eval(string command, string[] args)
     {
         var routerResult = CommandsHelper.GetCommand(command);
         if (routerResult is null)
         {
+            var binary = PathHelper.SearchPathForCommand(command);
+            if (binary is not null)
+            {
+               return ExecutableHelper.Execute(command, args);
+            }
             return CommandsHelper.CommandNotFound(command);
         }
         
