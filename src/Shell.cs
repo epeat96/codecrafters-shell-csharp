@@ -15,7 +15,7 @@ public class Shell
             command = userInput.First();
             args = userInput.Skip(1).ToArray();
                 
-        }while(Eval(command,args).Equals(EvalCode.Success));
+        }while(!CommandsHelper.IsExitCode(Eval(command,args)));
     }
 
     static EvalCode Eval(string command, string[] args)

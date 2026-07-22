@@ -4,5 +4,5 @@ public enum EvalCode
 {
     Success = 0,
     CleanExit = 1,
-    Error = 2
+    CommandNotFound = 2
 }

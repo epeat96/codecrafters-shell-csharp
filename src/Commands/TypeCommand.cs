@@ -8,7 +8,14 @@ public class TypeCommand : ICommand
         var searchResult = CommandsHelper.GetCommand(verifiedCommand);
         if (searchResult is null)
         {
-            return CommandsHelper.CommandNotFound(verifiedCommand);
+            var pathSearchResult = CommandsHelper.SearchPathForCommand(verifiedCommand, args);
+            if (pathSearchResult is null)
+            {
+                return CommandsHelper.CommandNotFound(verifiedCommand);
+            }
+            Console.WriteLine($"{command} is {pathSearchResult}");
+
+            return EvalCode.Success;
         }
         
         Console.WriteLine($"{verifiedCommand} is a shell builtin");
