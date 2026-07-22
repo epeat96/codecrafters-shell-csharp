@@ -1,3 +1,5 @@
+using System.Runtime.Serialization;
+
 namespace CodeCrafters.Shell;
 
 public static class PathHelper
@@ -5,7 +7,7 @@ public static class PathHelper
 
     public static string? SearchPathForDir(string path)
     {
-        if(!Directory.Exists(path))
+        if(!Directory.Exists(Path.GetFullPath(path)))
         {
             return null;
         }
