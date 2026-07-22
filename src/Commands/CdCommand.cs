@@ -12,7 +12,9 @@ public class CdCommand : ICommand
             return ResultCode.Error;
         }
         
-        var path = PathHelper.SearchPathForDir(args[0]);
+        var pathToSearch = (args[0] == "~" ? Environment.GetEnvironmentVariable("HOME") : args[0]) ?? "";
+        
+        var path = PathHelper.SearchPathForDir(pathToSearch);
         if (path == null)
         {
             Console.WriteLine($"cd: {args[0]}: No such file or directory");
