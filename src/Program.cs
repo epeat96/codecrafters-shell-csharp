@@ -4,12 +4,13 @@ class Program
     {
         // TODO: Uncomment the code below to pass the first stage
         var command = "";
+        string[] args;
         do
         {
             Console.Write("$ ");
             var userInput = Console.ReadLine()!.Split(' ');
             command = userInput.First();
-            var args = userInput.Skip(1).ToArray();
+            args = userInput.Skip(1).ToArray();
                 
         }while(!Eval(command,args).Equals(EvalCode.Success));
     }
