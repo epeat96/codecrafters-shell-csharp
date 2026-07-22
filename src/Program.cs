@@ -1,9 +1,15 @@
 using CodeCrafters.Shell;
 class Program
 {
+    private static readonly Shell Shell = new();
     static void Main()
     {
-        var shell = new Shell();
-        shell.Run();
+        Shell.Run();
     }
+
+    public static Shell GetShellInstance()
+    {
+        return Shell;
+    } 
+    
 }

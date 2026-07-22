@@ -12,6 +12,7 @@ public static class CommandsHelper
             "exit" => new ExitCommand(),
             "echo" => new EchoCommand(),
             "type"  => new TypeCommand(),
+            "pwd" => new PwdCommand(),
             _ => null,
         };
     }

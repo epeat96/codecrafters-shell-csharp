@@ -1,7 +1,11 @@
+using System;
+using System.IO;
 namespace CodeCrafters.Shell;
 
 public class Shell
 {
+   
+    private string cwd = Directory.GetCurrentDirectory();
     
     public void Run()
     {
@@ -35,6 +39,11 @@ public class Shell
         }
         
         return routerResult.Execute(command, args);
+    }
+
+    public string GetCwd()
+    {
+        return cwd;
     }
 
 }
