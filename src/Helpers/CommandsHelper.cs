@@ -13,6 +13,7 @@ public static class CommandsHelper
             "echo" => new EchoCommand(),
             "type"  => new TypeCommand(),
             "pwd" => new PwdCommand(),
+            "cd" => new CdCommand(),
             _ => null,
         };
     }
