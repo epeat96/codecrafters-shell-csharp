@@ -15,13 +15,7 @@ public class Shell
         do
         {
             Console.Write("$ ");
-            var userInput = Console.ReadLine()!.Split(' ');
-            command = userInput.First();
-            args = userInput
-                .Where(arg => !string.IsNullOrWhiteSpace(arg))
-                .Skip(1)
-                .ToArray();
-                
+            (command,args) = UserInputHelper.Parse(Console.ReadLine());
         }while(!EvalHelper.IsExitCode(Eval(command,args)));
     }
 
