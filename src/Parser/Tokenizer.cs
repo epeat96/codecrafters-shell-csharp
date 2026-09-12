@@ -59,6 +59,7 @@ public partial class Tokenizer(string input)
         State.InsideSingleQuote => InsideSingleQuoteTransition(symbol),
         State.OpeningDoubleQuote => OpeningDoubleQuoteTransition(symbol),
         State.InsideDoubleQuote => InsideDoubleQuoteTransition(symbol),
+        State.DefaultBackslash => State.Default,
         _ => DefaultTransition(symbol)
     };
 
@@ -78,6 +79,7 @@ public partial class Tokenizer(string input)
         {
             '\'' => State.OpeningSingleQuote,
             '\"' => State.OpeningDoubleQuote,
+            '\\' => State.DefaultBackslash,
             _ => State.Default
         };
     }

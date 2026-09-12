@@ -5,6 +5,7 @@ public partial class Tokenizer
     private enum State
     {
         Default,
+        DefaultBackslash,
         Whitespace,
         OpeningSingleQuote,
         InsideSingleQuote,
