@@ -35,6 +35,7 @@ public partial class Tokenizer(string input)
 
             if (!_cursor.Next())
             {
+                SaveToken();
                 break;
             }
         }
