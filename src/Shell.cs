@@ -1,22 +1,34 @@
 using System;
 using System.IO;
+using System.Reflection;
+using CodeCrafters.Shell.Parser;
+
 namespace CodeCrafters.Shell;
 
-public class Shell
+public class Shell()
 {
-   
     public string Cwd { get; set; } = Directory.GetCurrentDirectory();
-    
+
     public void Run()
     {
         // TODO: Uncomment the code below to pass the first stage
         var command = "";
-        string[] args;
+        string[] args = [];
         do
         {
             Console.Write("$ ");
-            (command,args) = UserInputHelper.Parse(Console.ReadLine());
-        }while(!EvalHelper.IsExitCode(Eval(command,args)));
+            var userInput = Console.ReadLine();
+            if (userInput is null)
+            {
+                Console.WriteLine("Please enter a command.");
+                continue;
+            }
+
+            var lexer = new Tokenizer(userInput);
+            var result = lexer.Tokenize();
+            command = result.First();
+            args = result.Skip(1).ToArray();
+        } while (!EvalHelper.IsExitCode(Eval(command, args)));
     }
 
     static ResultCode Eval(string command, string[] args)
@@ -27,12 +39,12 @@ public class Shell
             var binary = PathHelper.SearchPathForCommand(command);
             if (binary is not null)
             {
-               return ExecutableHelper.Execute(command, args);
+                return ExecutableHelper.Execute(command, args);
             }
+
             return CommandsHelper.CommandNotFound(command);
         }
-        
+
         return routerResult.Execute(command, args);
     }
-
 }

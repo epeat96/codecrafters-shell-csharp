@@ -6,6 +6,9 @@ public static class UserInputHelper
     {
         var command = "";
         var args = Array.Empty<string>();
+        var split = input.Split(' ');
+        command = split.First();
+        args = split.Skip(1).ToArray();
         return (command, args);
     }
 }

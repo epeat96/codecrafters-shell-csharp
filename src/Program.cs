@@ -1,4 +1,5 @@
 using CodeCrafters.Shell;
+
 class Program
 {
     private static readonly Shell Shell = new();
