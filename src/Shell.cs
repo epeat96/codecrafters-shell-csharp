@@ -12,8 +12,7 @@ public class Shell()
     public void Run()
     {
         // TODO: Uncomment the code below to pass the first stage
-        var command = "";
-        string[] args = [];
+        var tokens = new List<string>();
         do
         {
             Console.Write("$ ");
@@ -25,26 +24,24 @@ public class Shell()
             }
 
             var lexer = new Tokenizer(userInput);
-            var result = lexer.Tokenize();
-            command = result.First();
-            args = result.Skip(1).ToArray();
-        } while (!EvalHelper.IsExitCode(Eval(command, args)));
+            tokens = lexer.Tokenize();
+        } while (!EvalHelper.IsExitCode(Eval(tokens)));
     }
 
-    static ResultCode Eval(string command, string[] args)
+    static ResultCode Eval(List<string> tokens)
     {
-        var routerResult = CommandsHelper.GetCommand(command);
+        var routerResult = CommandsHelper.GetCommand(tokens.First());
         if (routerResult is null)
         {
-            var binary = PathHelper.SearchPathForCommand(command);
+            var binary = PathHelper.SearchPathForCommand(tokens.First());
             if (binary is not null)
             {
-                return ExecutableHelper.Execute(command, args);
+                return ExecutableHelper.Execute(tokens.First(), tokens.Skip(1).ToArray());
             }
 
-            return CommandsHelper.CommandNotFound(command);
+            return CommandsHelper.CommandNotFound(tokens.First());
         }
 
-        return routerResult.Execute(command, args);
+        return routerResult.Execute(tokens.First(), tokens.Skip(1).ToArray());
     }
 }
