@@ -28,7 +28,6 @@ public partial class Tokenizer(string input)
                     buff.Append(c);
                     break;
                 case State.Whitespace:
-                case State.ClosingSingleQuote:
                     SaveToken();
                     break;
             }
