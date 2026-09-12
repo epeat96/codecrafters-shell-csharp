@@ -77,6 +77,7 @@ public partial class Tokenizer(string input)
         return c switch
         {
             '\'' => State.OpeningSingleQuote,
+            '\"' => State.OpeningDoubleQuote,
             _ => State.Default
         };
     }
