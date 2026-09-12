@@ -13,6 +13,7 @@ public partial class Tokenizer
         ClosingSingleQuote,
         OpeningDoubleQuote,
         InsideDoubleQuote,
+        InsideDoubleQuoteBackslash,
         DoubleQuoteNotClosed,
         ClosingDoubleQuote,
         Final,

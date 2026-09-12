@@ -60,6 +60,7 @@ public partial class Tokenizer(string input)
         State.OpeningDoubleQuote => OpeningDoubleQuoteTransition(symbol),
         State.InsideDoubleQuote => InsideDoubleQuoteTransition(symbol),
         State.DefaultBackslash => State.Default,
+        State.InsideDoubleQuoteBackslash => State.InsideDoubleQuote,
         _ => DefaultTransition(symbol)
     };
 
@@ -122,6 +123,7 @@ public partial class Tokenizer(string input)
         return c switch
         {
             '\"' => State.ClosingDoubleQuote,
+            '\\' => State.InsideDoubleQuoteBackslash,
             _ => State.InsideDoubleQuote
         };
     }
