@@ -25,6 +25,7 @@ public partial class Tokenizer(string input)
             {
                 case State.Default:
                 case State.InsideSingleQuote:
+                case State.InsideDoubleQuote:
                     buff.Append(c);
                     break;
                 case State.Whitespace:
@@ -56,6 +57,8 @@ public partial class Tokenizer(string input)
     {
         State.OpeningSingleQuote => OpeningSingleQuoteTransition(symbol),
         State.InsideSingleQuote => InsideSingleQuoteTransition(symbol),
+        State.OpeningDoubleQuote => OpeningDoubleQuoteTransition(symbol),
+        State.InsideDoubleQuote => InsideDoubleQuoteTransition(symbol),
         _ => DefaultTransition(symbol)
     };
 
@@ -103,6 +106,34 @@ public partial class Tokenizer(string input)
         {
             '\'' => State.ClosingSingleQuote,
             _ => State.InsideSingleQuote
+        };
+    }
+
+    private State InsideDoubleQuoteTransition(char? symbol)
+    {
+        if (symbol is not char c)
+        {
+            return State.DoubleQuoteNotClosed;
+        }
+
+        return c switch
+        {
+            '\"' => State.ClosingDoubleQuote,
+            _ => State.InsideDoubleQuote
+        };
+    }
+
+    private State OpeningDoubleQuoteTransition(char? symbol)
+    {
+        if (symbol is not char c)
+        {
+            return State.DoubleQuoteNotClosed;
+        }
+
+        return c switch
+        {
+            '\"' => State.ClosingDoubleQuote,
+            _ => State.InsideDoubleQuote
         };
     }
 }

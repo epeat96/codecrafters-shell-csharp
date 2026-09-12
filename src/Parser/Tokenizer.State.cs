@@ -10,6 +10,10 @@ public partial class Tokenizer
         InsideSingleQuote,
         SingleQuoteNotClosed,
         ClosingSingleQuote,
+        OpeningDoubleQuote,
+        InsideDoubleQuote,
+        DoubleQuoteNotClosed,
+        ClosingDoubleQuote,
         Final,
     }
 }
